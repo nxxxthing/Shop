@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Validator;
 
+
 class AuthController extends Controller
 {
     /**
@@ -52,6 +53,7 @@ class AuthController extends Controller
             $validator->validated(),
             ['password' => bcrypt($request->password)]
         ));
+        $user->assignRole('user');
         return response()->json([
             'message' => 'User successfully registered',
             'user' => $user
