@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Admin\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,10 +20,12 @@ Route::get('/', function () {
 });
 
 Route::group([
-//    'middleware' => 'role:admin|user',
+//    'middleware' => 'role:admin',
     'prefix' => 'admin-panel'
 ], function ($router) {
-    Route::get('/', [HomeController::class, 'index']);
+    Route::get('/', [HomeController::class, 'index'])->name('homeAdmin');
+    Route::resource('products', ProductController::class);
+    Route::resource('users', UserController::class);
 });
 
 
