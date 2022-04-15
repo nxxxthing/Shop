@@ -45,9 +45,9 @@ class UserController extends Controller
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:6',
         ]);
-        if (!Auth::check() || ($request['role'] == 'admin' && !Auth::user()->hasRole('super-admin'))) {
-            return redirect()->back()->with('error', 'Only Super Admin can assign other Admins!');
-        }
+            if ($request['role'] == 'admin' && !(Auth::check() && Auth::user()->hasRole('super-admin'))) {
+                return redirect()->back()->with('error', 'Only Super Admin can assign other Admins!');
+            }
         $user = User::create(array_merge(
             $request->except('role'),
             ['password' => bcrypt($request->password)]
@@ -127,7 +127,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if (!Auth::check() || ($user->roles()->first()->name == 'admin' && !Auth::user()->hasRole('super-admin')))
+        if ($user->roles()->first()->name == 'admin' && !(Auth::check() && Auth::user()->hasRole('super-admin')))
             return redirect()->back()->with('error', 'Only super admin can delete other admins!');
         $user->delete();
         return redirect()->back()->with('message', 'User deleted successfully!');

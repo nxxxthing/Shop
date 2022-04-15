@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -117,6 +118,14 @@ class CreatePermissionTables extends Migration
         app('cache')
             ->store(config('permission.cache.store') != 'default' ? config('permission.cache.store') : null)
             ->forget(config('permission.cache.key'));
+
+        DB::table('roles')->insert(['name' => 'super-admin', 'guard_name' => 'api']);
+        DB::table('roles')->insert(['name' => 'admin', 'guard_name' => 'api']);
+        DB::table('roles')->insert(['name' => 'user', 'guard_name' => 'api']);
+        foreach (\App\Models\User::all() as $user) {
+            if ($user['name'] == 'admin') $user->assignRole('super-admin');
+            else $user->assignRole('user');
+        }
     }
 
     /**

@@ -121,6 +121,27 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-folder"></i>
+                            <p>
+                                Orders
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('products.index')}}" class="nav-link">
+                                    <p>All orders</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('products.create')}}" class="nav-link">
+                                    <p>Add order</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
