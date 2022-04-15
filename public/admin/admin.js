@@ -10,7 +10,7 @@ $(document).ready(function () {
     });
 
     $('.delete-btn').click(function () {
-        var res = confirm('Подтвердите действия');
+        var res = confirm('Are you sure you want to delete this?');
         if(!res){
             return false;
         }
@@ -25,3 +25,9 @@ $('#file-upload').change(function() {
     var file = $('#file-upload')[0].files[0].name;
     $(this).prev('label').text(file);
 });
+
+function resetImage() {
+    var file = document.getElementById("file-upload");
+    document.getElementById("secret").value = "no_photo.jpg";
+    $(file).prev('label').text('Choose image');
+}
