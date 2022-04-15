@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
@@ -26,6 +27,7 @@ Route::group([
     Route::get('/', [HomeController::class, 'index'])->name('homeAdmin');
     Route::resource('products', ProductController::class);
     Route::resource('users', UserController::class);
+    Route::resource('orders', OrderController::class);
 });
 
 
