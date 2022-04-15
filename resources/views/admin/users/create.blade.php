@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout')
 
-@section('title', 'Edit product')
+@section('title', 'Create user')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Edit product {{$product['name']}}</h1>
+                    <h1 class="m-0">Add user</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -37,7 +37,7 @@
             <div class="col-lg-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Edit Product</h3>
+                        <h3 class="card-title">Create Users</h3>
                     </div>
                     <!-- /.card-header -->
                     @if ($errors->any())
@@ -50,37 +50,31 @@
                         </div>
                 @endif
                 <!-- form start -->
-                    <form action="{{route('products.update', $product)}}" enctype="multipart/form-data" method="POST">
+                    <form action="{{route('users.store')}}" enctype="multipart/form-data" method="POST">
                         @csrf
-                        @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="name">Product name</label>
+                                <label for="name">Name</label>
                                 <input type="text" class="form-control" id="name" name="name"
-                                       value="{{$product['name']}}" required>
+                                       placeholder="Enter name" required>
                             </div>
                             <div class="form-group">
-                                <label for="author">Author name</label>
-                                <input type="text" class="form-control" id="author" name="author"
-                                       value="{{$product['author']}}" required>
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                       placeholder="Enter email" required>
                             </div>
                             <div class="form-group">
-                                <label for="price">Price</label>
-                                <input type="number" step="0.01" min="0.01" class="form-control" id="price" name="price"
-                                       value="{{$product['price']}}" required>
+                                <label for="password">Password</label>
+                                <input type="text" minlength="6"  class="form-control" id="password" name="password"
+                                       placeholder="Enter password" required>
                             </div>
                             <div class="form-group">
-                                <label for="image">File input</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <label class="custom-file-label" for="file-upload"  ><i class="fa fa-cloud-upload"></i>
-                                            {{$product['image_name']}}</label>
-                                        <input type="file" class="custom-file-input" id="file-upload" name="image"
-                                               style="display:none;">
-                                        <input type="hidden" id="secret" name="secret" value="{{ $product['image_name'] }}">
-                                    </div>
-                                </div>
-                                <button class="brn btn-secondary" type="button" onclick="resetImage()">Delete image</button>
+                                <label for="role">Role</label>
+                                <select name="role" id="role" class="form-control">
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->name }}"> {{ $role->name }} </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <!-- /.card-body -->

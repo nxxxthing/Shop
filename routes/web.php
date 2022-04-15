@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 Route::group([
-//    'middleware' => 'role:admin',
+//    'middleware' => 'role:admin,super-admin',
     'prefix' => 'admin-panel'
 ], function ($router) {
     Route::get('/', [HomeController::class, 'index'])->name('homeAdmin');

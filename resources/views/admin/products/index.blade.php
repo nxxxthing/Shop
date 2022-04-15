@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout')
 
-@section('title', 'All products')
+@section('title', 'Products')
 
 @section('content')
     <!-- Content Header (Page header) -->

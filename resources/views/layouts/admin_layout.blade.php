@@ -89,12 +89,12 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="./index.html" class="nav-link">
+                                <a href="{{route('users.index')}}" class="nav-link">
                                     <p>All users</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="./index.html" class="nav-link">
+                                <a href="{{route('users.create')}}" class="nav-link">
                                     <p>Add user</p>
                                 </a>
                             </li>
