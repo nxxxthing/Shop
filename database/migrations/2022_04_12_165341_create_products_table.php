@@ -42,9 +42,8 @@ return new class extends Migration
     public function down()
     {
         if (Schema::hasTable('products')) {
-            $names = DB::table('products')->select('image_name')->get();
+            $names = DB::table('products')->where('image_name', '<>', 'no_photo.jpg' )->get();
             foreach ($names as $name) {
-                if ($name == 'no_photo.jpg') continue;
                 Storage::delete(StorageServiceProvider::IMG_PATH . $name->image_name);
             }
         }
