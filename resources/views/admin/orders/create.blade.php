@@ -69,6 +69,15 @@
                                 <input type="number" min="1" step="1" id="amount" name="amount" class="form-control"
                                        value="1" required>
                             </div>
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="1"> Pending </option>
+                                    <option value="2"> Arriving </option>
+                                    <option value="3"> Arrived </option>
+                                    <option value="4"> Confirmed </option>
+                                </select>
+                            </div>
                         </div>
                         <!-- /.card-body -->
 

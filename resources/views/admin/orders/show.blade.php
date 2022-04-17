@@ -46,6 +46,10 @@
                     </th>
                     <th style="width: 3%">
                         price
+                    </th>
+                    <th style="width: 3%">
+                        status
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -64,6 +68,9 @@
                         </td>
                         <td>
                             {{$order->price}}
+                        </td>
+                        <td>
+                            {{$status}}
                         </td>
                     </tr>
                 </tbody>

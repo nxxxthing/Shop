@@ -77,6 +77,15 @@
                                 <input type="number" min="1" step="1" id="amount" name="amount" class="form-control"
                                        value="{{$order->amount}}" required>
                             </div>
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="1" @if ($order->status == 1) selected @endif> Pending </option>
+                                    <option value="2" @if ($order->status == 2) selected @endif> Arriving </option>
+                                    <option value="3" @if ($order->status == 3) selected @endif> Arrived </option>
+                                    <option value="4" @if ($order->status == 4) selected @endif> Confirmed </option>
+                                </select>
+                            </div>
                         </div>
                         <!-- /.card-body -->
 

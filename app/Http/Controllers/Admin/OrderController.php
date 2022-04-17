@@ -64,10 +64,31 @@ class OrderController extends Controller
     {
         $product_name = Product::find($order['product_id'])->name;
         $user_name = User::find($order['user_id'])->name;
+        $status = '';
+        switch ($order['status']) {
+            case 1:
+                $status = 'pending';
+                break;
+            case 2:
+                $status = 'arriving';
+                break;
+            case 3:
+                $status = 'arrived';
+                break;
+            case 4:
+                $status = 'confirmed';
+                break;
+            default:
+                return response([
+                    "error" => "Something is wrong with orders db",
+                    "help" => "Contact the developers team to verify"
+                ],400);
+        }
         return view('admin.orders.show', [
             'order' => $order,
             'user_name' => $user_name,
-            'product_name' => $product_name
+            'product_name' => $product_name,
+            'status' => $status
         ]);
     }
 
@@ -97,7 +118,8 @@ class OrderController extends Controller
      */
     public function update(Request $request, Orders $order)
     {
-        if ($order['user_id'] == $request['user_id'] && $order['product_id'] == $request['product_id'] && $order['amount'] == $request['amount'])
+        if ($order['user_id'] == $request['user_id'] && $order['product_id'] == $request['product_id'] &&
+            $order['amount'] == $request['amount'] && $order['status'] == $request['status'])
             return redirect()->back()->with('error', 'Nothing was changed!');
         $product = Product::find($request['product_id']);
         $price = $request['amount'] * $product->price;
@@ -105,6 +127,7 @@ class OrderController extends Controller
         $order['product_id'] = $request['product_id'];
         $order['amount'] = $request['amount'];
         $order['price'] = $price;
+        $order['status'] = $request['status'];
         $order->save();
         return redirect()->back()->with('message', 'Order edited successfully!');
     }

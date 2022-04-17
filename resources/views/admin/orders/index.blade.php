@@ -47,6 +47,9 @@
                     <th style="width: 3%">
                         price
                     </th>
+                    <th style="width: 3%">
+                        status
+                    </th>
                     <th style="width: 20%">
                     </th>
                 </tr>
@@ -68,6 +71,9 @@
                         </td>
                         <td>
                             {{$order->price}}
+                        </td>
+                        <td>
+                            {{$order->status}}
                         </td>
                         <td class="project-actions text-right">
                             <a class="btn btn-primary btn-sm" href="{{route('orders.show', $order)}}">
