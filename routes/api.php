@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,14 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'products'
+], function ($router) {
+    Route::get('/', [ApiController::class, 'index']);
+    Route::get('/product/{id}', [ApiController::class, 'show']);
 });
 
 
