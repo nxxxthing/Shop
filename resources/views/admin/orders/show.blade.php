@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout')
 
-@section('title', 'Order')
+@section('title', __('messages.order'))
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,11 +8,17 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Order {{$order->getKey()}}</h1>
+                    <h1 class="m-0">{{__('messages.order')}} {{$order->getKey()}}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">{{__('messages.home')}}</a></li>
+                        <li class="breadcrumb-item">
+                            <select class="changeLang">
+                                <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                                <option value="ua" {{ session()->get('locale') == 'ua' ? 'selected' : '' }}>Українська</option>
+                            </select>
+                        </li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -36,19 +42,19 @@
                         id
                     </th>
                     <th style="width: 1%">
-                        user
+                        {{__('messages.user')}}
                     </th>
                     <th style="width: 1%">
-                        product
+                        {{__('messages.product')}}
                     </th>
                     <th style="width: 3%">
-                        amount
+                        {{__('messages.amount')}}
                     </th>
                     <th style="width: 3%">
-                        price
+                        {{__('messages.price')}}
                     </th>
                     <th style="width: 3%">
-                        status
+                        {{__('messages.status')}}
                     </th>
                 </tr>
                 </thead>

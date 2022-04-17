@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout')
 
-@section('title', 'Users')
+@section('title', __('messages.users'))
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,11 +8,17 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">All products</h1>
+                    <h1 class="m-0">{{__('messages.all_users')}}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">{{__('messages.home')}}</a></li>
+                        <li class="breadcrumb-item">
+                            <select class="changeLang">
+                                <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                                <option value="ua" {{ session()->get('locale') == 'ua' ? 'selected' : '' }}>Українська</option>
+                            </select>
+                        </li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -41,15 +47,15 @@
                         id
                     </th>
                     <th style="width: 20%">
-                        name
+                        {{__('messages.name')}}
                     </th>
                     <th style="width: 8%">
-                        email
+                        {{__('messages.email')}}
                     </th>
                     <th>
-                        role
+                        {{__('messages.role')}}
                     </th>
-                    <th style="width: 20%">
+                    <th style="width: 30%">
                     </th>
                 </tr>
                 </thead>
@@ -72,7 +78,7 @@
                             <a class="btn btn-info btn-sm" href="{{route('users.edit', $user)}}">
                                 <i class="fas fa-pencil-alt">
                                 </i>
-                                Edit
+                                {{__('messages.edit')}}
                             </a>
                             @if($user->roles->first()->name != 'super-admin')
                                 <form class="btn" action="{{ route('users.destroy', $user) }}" method="POST">
@@ -81,7 +87,7 @@
                                     <button type="submit" class="btn btn-danger btn-sm delete-btn">
                                         <i class="fas fa-trash">
                                         </i>
-                                        Delete
+                                        {{__('messages.delete')}}
                                     </button>
                                 </form>
                             @endif

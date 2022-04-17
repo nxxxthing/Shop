@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin - @yield('title')</title>
+    <title>{{__('messages.admin')}} - @yield('title')</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -39,7 +39,7 @@
         <!-- Brand Logo -->
         <a href="index3.html" class="brand-link">
             <img src="/admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">Admin-panel</span>
+            <span class="brand-text font-weight-light">{{__('messages.admin_panel')}}</span>
         </a>
 
         <!-- Sidebar -->
@@ -50,7 +50,7 @@
                     <img src="/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">{{Auth::user()->name ?? 'not authorised'}}</a>
+                    <a href="#" class="d-block">{{Auth::user()->name ?? __('messages.not_authorised')}}</a>
                 </div>
             </div>
 
@@ -75,7 +75,7 @@
                         <a href="{{route('homeAdmin')}}" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
-                                Home
+                                {{__('messages.home')}}
                             </p>
                         </a>
                     </li>
@@ -83,19 +83,19 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-solid fa-user"></i>
                             <p>
-                                User
+                                {{__('messages.users')}}
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{route('users.index')}}" class="nav-link">
-                                    <p>All users</p>
+                                    <p>{{__('messages.all_users')}}</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{route('users.create')}}" class="nav-link">
-                                    <p>Add user</p>
+                                    <p>{{__('messages.add_user')}}</p>
                                 </a>
                             </li>
                         </ul>
@@ -104,19 +104,19 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-suitcase"></i>
                             <p>
-                                Product
+                                {{__('messages.products')}}
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{route('products.index')}}" class="nav-link">
-                                    <p>All products</p>
+                                    <p>{{__('messages.all_products')}}</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{route('products.create')}}" class="nav-link">
-                                    <p>Add product</p>
+                                    <p>{{__('messages.add_product')}}</p>
                                 </a>
                             </li>
                         </ul>
@@ -125,19 +125,19 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-folder"></i>
                             <p>
-                                Orders
+                                {{__('messages.orders')}}
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{route('orders.index')}}" class="nav-link">
-                                    <p>All orders</p>
+                                    <p>{{__('messages.all_orders')}}</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{route('orders.create')}}" class="nav-link">
-                                    <p>Add order</p>
+                                    <p>{{__('messages.add_order')}}</p>
                                 </a>
                             </li>
                         </ul>
@@ -198,5 +198,14 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 {{--<script src="/admin/dist/js/pages/dashboard.js"></script>--}}
 <script src="/admin/admin.js"></script>
+<script type="text/javascript">
+
+    var url = "{{ route('changeLang') }}";
+
+    $(".changeLang").change(function(){
+        window.location.href = url + "?lang="+ $(this).val();
+    });
+
+</script>
 </body>
 </html>

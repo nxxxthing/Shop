@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout')
 
-@section('title', 'Edit product')
+@section('title', __('messages.edit_product'))
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,11 +8,17 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Edit product {{$product['name']}}</h1>
+                    <h1 class="m-0">{{__('messages.edit_product')}} {{$product['name']}}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('homeAdmin')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">{{__('messages.home')}}</a></li>
+                        <li class="breadcrumb-item">
+                            <select class="changeLang">
+                                <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                                <option value="ua" {{ session()->get('locale') == 'ua' ? 'selected' : '' }}>Українська</option>
+                            </select>
+                        </li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -37,7 +43,7 @@
             <div class="col-lg-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Edit Product</h3>
+                        <h3 class="card-title">{{__('messages.edit_product')}}</h3>
                     </div>
                     <!-- /.card-header -->
                     @if ($errors->any())
@@ -55,22 +61,22 @@
                         @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="name">Product name</label>
+                                <label for="name">{{__('messages.name_for_product')}}</label>
                                 <input type="text" class="form-control" id="name" name="name"
                                        value="{{$product['name']}}" required>
                             </div>
                             <div class="form-group">
-                                <label for="author">Author name</label>
+                                <label for="author">{{__('messages.author')}}</label>
                                 <input type="text" class="form-control" id="author" name="author"
                                        value="{{$product['author']}}" required>
                             </div>
                             <div class="form-group">
-                                <label for="price">Price</label>
+                                <label for="price">{{__('messages.price')}}</label>
                                 <input type="number" step="0.01" min="0.01" class="form-control" id="price" name="price"
                                        value="{{$product['price']}}" required>
                             </div>
                             <div class="form-group">
-                                <label for="image">File input</label>
+                                <label for="image">{{__('messages.cover')}}</label>
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <label class="custom-file-label" for="file-upload"  ><i class="fa fa-cloud-upload"></i>
@@ -80,13 +86,13 @@
                                         <input type="hidden" id="secret" name="secret" value="{{ $product['image_name'] }}">
                                     </div>
                                 </div>
-                                <button class="brn btn-secondary" type="button" onclick="resetImage()">Delete image</button>
+                                <button class="brn btn-secondary" type="button" onclick="resetImage()">{{__('messages.delete')}}</button>
                             </div>
                         </div>
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">{{__('messages.submit')}}</button>
                         </div>
                     </form>
                 </div>

@@ -46,7 +46,7 @@ class UserController extends Controller
             'password' => 'required|string|min:6',
         ]);
             if ($request['role'] == 'admin' && !(Auth::check() && Auth::user()->hasRole('super-admin'))) {
-                return redirect()->back()->with('error', 'Only Super Admin can assign other Admins!');
+                return redirect()->back()->with('error', __('messages.only_super_adm'));
             }
         $user = User::create(array_merge(
             $request->except('role'),
@@ -54,7 +54,7 @@ class UserController extends Controller
         ));
         $user->save();
         $user->assignRole($request['role']);
-        return redirect()->back()->with('message', 'User added successfully!');
+        return redirect()->back()->with('message', __('messages.user_add_suc'));
     }
 
     /**
@@ -100,12 +100,12 @@ class UserController extends Controller
             ]);
         } elseif ($request['name'] == $user['name'] && $request['password'] == $user['password']
                                 && $user->roles()->first()->name == $request['role']) {
-            return redirect()->back()->with('error', 'Nothing was edited!');
+            return redirect()->back()->with('error', __('messages.nothing_edited'));
         }
 
         if ($request['role'] != $user->roles()->first()->name) {
             if (!Auth::check() || ($request['role'] == 'admin' && !Auth::user()->hasRole('super-admin'))) {
-                return redirect()->back()->with('error', 'Only Super Admin can assign other Admins!');
+                return redirect()->back()->with('error', __('messages.only_super_adm'));
             }
             $user->roles()->detach();
             $user->assignRole($request['role']);
@@ -116,7 +116,7 @@ class UserController extends Controller
             $user['password'] = bcrypt($request['password']);
         }
         $user->save();
-        return redirect()->back()->with('message', 'User edited successfully!');
+        return redirect()->back()->with('message', __('messages.user_edited_suc'));
     }
 
     /**
@@ -128,8 +128,8 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if ($user->roles()->first()->name == 'admin' && !(Auth::check() && Auth::user()->hasRole('super-admin')))
-            return redirect()->back()->with('error', 'Only super admin can delete other admins!');
+            return redirect()->back()->with('error', __('messages.only_super_adm'));
         $user->delete();
-        return redirect()->back()->with('message', 'User deleted successfully!');
+        return redirect()->back()->with('message', __('messages.user_del_suc'));
     }
 }

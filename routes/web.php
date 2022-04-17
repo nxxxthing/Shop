@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\ProductController;
 |
 */
 
+Route::get('lang/change', [\App\Http\Controllers\LangController::class, 'change'])->name('changeLang');
+
 Route::get('/', function () {
     return view('welcome');
 });

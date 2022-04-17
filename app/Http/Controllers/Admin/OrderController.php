@@ -51,7 +51,7 @@ class OrderController extends Controller
             'price' => $price,
         ]));
         $order->save();
-        return redirect()->back()->with('message', 'Order added successfully!');
+        return redirect()->back()->with('message', __('messages.order_add_suc'));
     }
 
     /**
@@ -120,7 +120,7 @@ class OrderController extends Controller
     {
         if ($order['user_id'] == $request['user_id'] && $order['product_id'] == $request['product_id'] &&
             $order['amount'] == $request['amount'] && $order['status'] == $request['status'])
-            return redirect()->back()->with('error', 'Nothing was changed!');
+            return redirect()->back()->with('error', __('messages.nothing_edited'));
         $product = Product::find($request['product_id']);
         $price = $request['amount'] * $product->price;
         $order['user_id'] = $request['user_id'];
@@ -129,7 +129,7 @@ class OrderController extends Controller
         $order['price'] = $price;
         $order['status'] = $request['status'];
         $order->save();
-        return redirect()->back()->with('message', 'Order edited successfully!');
+        return redirect()->back()->with('message', __('messages.order_edit_suc'));
     }
 
     /**
@@ -141,6 +141,6 @@ class OrderController extends Controller
     public function destroy(Orders $order)
     {
         $order->delete();
-        return redirect()->back()->with('message', 'Order deleted successfully!');
+        return redirect()->back()->with('message', __('messages.order_del_suc'));
     }
 }

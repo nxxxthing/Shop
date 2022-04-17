@@ -62,7 +62,7 @@ class ProductController extends Controller
 
         $product = Product::create(array_merge($request->all(), ['image_name' => $image_name]));
         $product->save();
-        return redirect()->back()->with('message', 'Product added successfully!');
+        return redirect()->back()->with('message', __('messages.prod_add_suc'));
     }
 
     /**
@@ -115,7 +115,7 @@ class ProductController extends Controller
             $request->file('image')->storeAs($path, $image_name);
         } elseif ($request['name'] == $product['name'] && $request['author'] == $product['author'] &&
             $request['price'] == $product['price'] && $image_name == $product['image_name'])
-            return redirect()->back()->with('error', 'Nothing was edited!');
+            return redirect()->back()->with('error', __('messages.nothing_edited'));
 
         if ($image_name == "no_photo.jpg" && $image_name != $product['image_name']) {
             Storage::delete(StorageServiceProvider::IMG_PATH . $product['image_name']);
@@ -125,7 +125,7 @@ class ProductController extends Controller
         $product['price'] = $request['price'];
         $product['image_name'] = $image_name;
         $product->save();
-        return redirect()->back()->with('message', 'Product edited successfully!');
+        return redirect()->back()->with('message', __('messages.prod_edit_suc'));
     }
 
     /**
@@ -140,6 +140,6 @@ class ProductController extends Controller
             Storage::delete(StorageServiceProvider::IMG_PATH . $product['image_name']);
         }
         $product->delete();
-        return redirect()->back()->with('message', 'Product deleted successfully!');
+        return redirect()->back()->with('message', __('messages.prod_del_suc'));
     }
 }

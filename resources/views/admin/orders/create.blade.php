@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout')
 
-@section('title', 'Add order')
+@section('title', __('messages.add_order'))
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,11 +8,17 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Add order</h1>
+                    <h1 class="m-0">{{__('messages.add_order')}}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('homeAdmin')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">{{__('messages.home')}}</a></li>
+                        <li class="breadcrumb-item">
+                            <select class="changeLang">
+                                <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                                <option value="ua" {{ session()->get('locale') == 'ua' ? 'selected' : '' }}>Українська</option>
+                            </select>
+                        </li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -32,7 +38,7 @@
             <div class="col-lg-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Create Order</h3>
+                        <h3 class="card-title">{{__('messages.create_order')}}</h3>
                     </div>
                     <!-- /.card-header -->
                     @if ($errors->any())
@@ -49,7 +55,7 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="user_id">User</label>
+                                <label for="user_id">{{__('messages.user')}}</label>
                                 <select name="user_id" id="user_id" class="form-control">
                                     @foreach($users as $user)
                                         <option value="{{ $user->getKey() }}"> {{ $user->name }} </option>
@@ -57,7 +63,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="product_id">Product</label>
+                                <label for="product_id">{{__('messages.product')}}</label>
                                 <select name="product_id" id="product_id" class="form-control">
                                     @foreach($products as $product)
                                         <option value="{{ $product->getKey() }}"> {{ $product->name }} </option>
@@ -65,24 +71,24 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="amount">Amount</label>
+                                <label for="amount">{{__('messages.amount')}}</label>
                                 <input type="number" min="1" step="1" id="amount" name="amount" class="form-control"
                                        value="1" required>
                             </div>
                             <div class="form-group">
-                                <label for="status">Status</label>
+                                <label for="status">{{__('messages.status')}}</label>
                                 <select name="status" id="status" class="form-control">
-                                    <option value="1"> Pending </option>
-                                    <option value="2"> Arriving </option>
-                                    <option value="3"> Arrived </option>
-                                    <option value="4"> Confirmed </option>
+                                    <option value="1"> {{__('messages.pending')}} </option>
+                                    <option value="2"> {{__('messages.arriving')}} </option>
+                                    <option value="3"> {{__('messages.arrived')}} </option>
+                                    <option value="4"> {{__('messages.confirmed')}} </option>
                                 </select>
                             </div>
                         </div>
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">{{__('messages.submit')}}</button>
                         </div>
                     </form>
                 </div>

@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout')
 
-@section('title', 'Products')
+@section('title', __('messages.products'))
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,11 +8,17 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">All products</h1>
+                    <h1 class="m-0">{{__('messages.all_products')}}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">{{__('messages.home')}}</a></li>
+                        <li class="breadcrumb-item">
+                            <select class="changeLang">
+                                <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                                <option value="ua" {{ session()->get('locale') == 'ua' ? 'selected' : '' }}>Українська</option>
+                            </select>
+                        </li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -36,18 +42,18 @@
                         id
                     </th>
                     <th style="width: 20%">
-                        name
+                        {{__('messages.name_for_product')}}
                     </th>
                     <th style="width: 8%">
-                        author
+                        {{__('messages.author')}}
                     </th>
                     <th>
-                        price
+                        {{__('messages.price')}}
                     </th>
-                    <th style="width: 30%" class="text-center">
-                        book cover
+                    <th style="width: 20%" class="text-center">
+                        {{__('messages.cover')}}
                     </th>
-                    <th style="width: 20%">
+                    <th style="width: 30%">
                     </th>
                 </tr>
                 </thead>
@@ -78,7 +84,7 @@
                         <a class="btn btn-info btn-sm" href="{{route('products.edit', $product)}}">
                             <i class="fas fa-pencil-alt">
                             </i>
-                            Edit
+                            {{__('messages.edit')}}
                         </a>
                         <form class="btn" action="{{ route('products.destroy', $product) }}" method="POST">
                             @csrf
@@ -86,7 +92,7 @@
                             <button type="submit" class="btn btn-danger btn-sm delete-btn">
                                 <i class="fas fa-trash">
                                 </i>
-                                Delete
+                                {{__('messages.delete')}}
                             </button>
                         </form>
                     </td>
