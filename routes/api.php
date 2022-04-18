@@ -35,6 +35,13 @@ Route::group([
     Route::get('/product/{id}', [ApiController::class, 'show']);
 });
 
+Route::group([
+    'middleware' => ['api', 'role:admin|super-admin'],
+    'prefix' => 'admin'
+], function ($router) {
+    Route::post('/order/save', [ApiController::class, 'save_admin']);
+});
+
 
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();

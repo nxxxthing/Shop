@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Orders;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +22,14 @@ class ApiController extends Controller
         $product = Product::findOrFail($id);
         return response()->json([
             'message' => $product,
+        ]);
+    }
+
+    public function save_admin(Request $request)
+    {
+        $order = Orders::create($request->all());
+        return response()->json([
+            'message' => $order,
         ]);
     }
 }

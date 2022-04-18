@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Orders;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\ViewOrderData;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -21,7 +23,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Orders::all();
+//        $orders = Orders::all();
+        $orders = ViewOrderData::all();
         return view('admin.orders.index', ['orders' => $orders]);
     }
 
@@ -45,12 +48,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $product = Product::find($request['product_id']);
-        $price = $request['amount'] * $product->price;
-        $order = Orders::create(array_merge($request->all(), [
-            'price' => $price,
-        ]));
-        $order->save();
+        $order = Orders::create($request->all());
         return redirect()->back()->with('message', __('messages.order_add_suc'));
     }
 
@@ -121,12 +119,9 @@ class OrderController extends Controller
         if ($order['user_id'] == $request['user_id'] && $order['product_id'] == $request['product_id'] &&
             $order['amount'] == $request['amount'] && $order['status'] == $request['status'])
             return redirect()->back()->with('error', __('messages.nothing_edited'));
-        $product = Product::find($request['product_id']);
-        $price = $request['amount'] * $product->price;
         $order['user_id'] = $request['user_id'];
         $order['product_id'] = $request['product_id'];
         $order['amount'] = $request['amount'];
-        $order['price'] = $price;
         $order['status'] = $request['status'];
         $order->save();
         return redirect()->back()->with('message', __('messages.order_edit_suc'));

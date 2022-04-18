@@ -22,12 +22,10 @@ class OrdersFactory extends Factory
         $product_id = Product::all()->random()->getKey();
         $amount = rand(1, 5);
         $status = rand(1,4);
-        $price = Product::find($product_id)->price * $amount;
         return [
             'user_id' => $user_id,
             'product_id' => $product_id,
             'amount' => $amount,
-            'price' => $price,
             'status' => $status,
             'created_at' => now(),
             'updated_at' => now()
