@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OrderResource;
+use App\Http\Resources\ProductsCollection;
+use App\Http\Resources\ProductsResource;
 use App\Models\Orders;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -13,17 +16,11 @@ class ApiController extends Controller
 {
     public function index() {
         $products = DB::table('products')->paginate(5);
-        return response()->json([
-            'message' => 'List of all products with pagination',
-            'products' => $products
-        ]);
+        return ProductsResource::collection($products);
     }
 
     public function show($id) {
-        $product = Product::findOrFail($id);
-        return response()->json([
-            'message' => $product,
-        ]);
+        return new ProductsResource(Product::findOrFail($id));
     }
 
     public function save_admin(Request $request)
@@ -31,22 +28,20 @@ class ApiController extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|exists:users,id',
             'product_id' => 'required|exists:products,id',
-            'status' => 'gte:1|lte:4'
-        ], $messages = [
+            'amount' => 'required|gte:1',
+            'status' => 'required|gte:1|lte:4'
+        ], [
             'user_id.exists' => 'User with this id was not found',
             'product_id.exists' => 'Product with this id was not found',
             'status.lte' => 'Status has to be from 1 to 4',
             'status.gte' => 'Status has to be from 1 to 4',
+            'amount.gte' => 'Amount can not be less than 1',
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()
-            ]);
+            return response()->json($validator->errors(), 422);
         }
         $order = Orders::create($request->all());
-        return response()->json([
-            'message' => $order,
-        ]);
+        return new OrderResource($order);
     }
 }

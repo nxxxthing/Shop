@@ -15,11 +15,15 @@ return new class extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
+            $table->string('bg_image');
+            $table->timestamps();
+        });
+        Schema::create('content', function (Blueprint $table) {
+            $table->foreignId('pages_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->string('language');
             $table->string('name');
             $table->string('title');
             $table->string('main_text');
-            $table->string('bg_image');
-            $table->timestamps();
         });
     }
 
@@ -30,6 +34,7 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('content');
         Schema::dropIfExists('pages');
     }
 };

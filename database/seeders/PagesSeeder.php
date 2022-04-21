@@ -16,28 +16,65 @@ class PagesSeeder extends Seeder
     public function run()
     {
         DB::table('pages')->insert([
+            'bg_image' => 'bg1.jpeg',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('content')->insert([
+            'pages_id' => 1,
+            'language' => 'en',
             'name' => 'Main',
-            'title' => 'main',
+            'title' => 'Main',
             'main_text' => 'This is main page',
+        ]);
+        DB::table('content')->insert([
+            'pages_id' => 1,
+            'language' => 'ua',
+            'name' => 'Головна',
+            'title' => 'Головна',
+            'main_text' => 'Ви на головній сторінці',
+        ]);
+
+
+        DB::table('pages')->insert([
             'bg_image' => 'bg1.jpeg',
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        DB::table('pages')->insert([
+        DB::table('content')->insert([
+            'pages_id' => 2,
+            'language' => 'en',
             'name' => 'About',
-            'title' => 'about',
+            'title' => 'About',
             'main_text' => 'This is about page',
+        ]);
+        DB::table('content')->insert([
+            'pages_id' => 2,
+            'language' => 'ua',
+            'name' => 'Про нас',
+            'title' => 'Про нас',
+            'main_text' => 'Ви на сторінці Про нас',
+        ]);
+
+
+        DB::table('pages')->insert([
             'bg_image' => 'bg1.jpeg',
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        DB::table('pages')->insert([
+        DB::table('content')->insert([
+            'pages_id' => 3,
+            'language' => 'en',
             'name' => 'Contacts',
-            'title' => 'contacts',
+            'title' => 'Contacts',
             'main_text' => 'This is contacts page',
-            'bg_image' => 'bg1.jpeg',
-            'created_at' => now(),
-            'updated_at' => now()
+        ]);
+        DB::table('content')->insert([
+            'pages_id' => 3,
+            'language' => 'ua',
+            'name' => 'Контакти',
+            'title' => 'Контакти',
+            'main_text' => 'Ви на сторінці Контакти',
         ]);
     }
 }
