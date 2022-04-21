@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\PagesController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
@@ -40,6 +41,8 @@ Route::group([
     'prefix' => 'admin'
 ], function ($router) {
     Route::post('/order/save', [ApiController::class, 'save_admin']);
+    Route::get('/pages', [PagesController::class, 'index']);
+    Route::get('/pages/{id}', [PagesController::class, 'show']);
 });
 
 
