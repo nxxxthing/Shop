@@ -60,6 +60,7 @@ class OrderController extends Controller
      */
     public function show(Orders $order)
     {
+        $orders = ViewOrderData::findOrFail($order->getKey());
         $product_name = Product::find($order['product_id'])->name;
         $user_name = User::find($order['user_id'])->name;
         $status = '';

@@ -5,6 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 return new class extends Migration {
     /**
@@ -24,18 +25,17 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        User::create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('admin123'),
-        ]);
-//        DB::table('users')->insert(
-//            array(
-//                'name' => 'admin',
-//                'email' => 'admin@admin.com',
-//                'password' => bcrypt('admin123'),
-//            )
-//        );
+
+        DB::table('users')->insert(
+            array(
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => bcrypt('admin123'),
+                'remember_token' => Str::random(10),
+                'created_at' => now(),
+                'updated_at' => now(),
+            )
+        );
     }
 
     /**

@@ -23,7 +23,7 @@ Route::get('/', function () {
 });
 
 Route::group([
-//    'middleware' => 'role:admin,super-admin',
+    'middleware' => 'role:admin|super-admin',
     'prefix' => 'admin-panel'
 ], function ($router) {
     Route::get('/', [HomeController::class, 'index'])->name('homeAdmin');
@@ -33,3 +33,7 @@ Route::group([
 });
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
